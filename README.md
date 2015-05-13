@@ -17,6 +17,65 @@
 Installs MongoDB on RHEL/Ubuntu/Debian from OS repo, or alternatively from
 10gen repository [installation documentation](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages).
 
+*Warning:* It's a fork module from puppetlabs/mongodb , I added extra skills to the component module.
+
+With this puppet module you can manage your Mongos, Mongo ConfigDB's 
+and a MongoDB Data servers as a cluster and High available.
+
+## Usage :
+
+You can install these 3 mongodb instances with managing the mongodb_type.
+
+For installing a mongo data server you can use this sample Hieradatas :
+
+        mongodb::data::mongodb_type: 'mongod'
+        mongodb::data::version: '2.6.9'
+        mongodb::data::bind_ip:
+        - '192.168.2.59'
+        mongodb::data::manage_package_repo: true
+        mongodb::data::dbpath: '/var/lib/mongodb'
+        mongodb::data::logpath: '/var/log/mongodb/mongod.log'
+        mongodb::data::oplogsize: '1024'
+        mongodb::data::replset: 'methamphetamine'
+        mongodb::data::rest: true
+        mongodb::data::fork: true
+        mongodb::data::nofile: '64000'
+        mongodb::data::nproc: '64000'
+
+For installing a mongo config-dbs you can use this sample Hieradatas :
+
+        mongodb::configdb::mongodb_type: 'configdb'
+        mongodb::configdb::version: '2.6.9'
+        mongodb::configdb::manage_package_repo: true
+        mongodb::configdb::bind_ip:
+        - '192.168.2.59'
+        mongodb::configdb::dbpath: '/var/lib/mongodb'
+        mongodb::configdb::logpath: '/var/log/mongodb/configdb.log'
+        mongodb::configdb::rest: true
+        mongodb::configdb::fork: true
+        mongodb::configdb::nofile: '64000'
+        mongodb::configdb::nproc: '64000'
+        mongodb::configdb::port: '27019'
+
+
+For installing a mongos-router you can use this sample Hieradatas :
+
+        mongodb::mongos::mongodb_type: 'mongos'
+        mongodb::mongos::version: '2.6.9'
+        mongodb::mongos::configdb:
+        - '192.168.2.55:27019'
+        - '192.168.2.54:27019'
+        mongodb::mongos::manage_package_repo: true
+        mongodb::mongos::dbpath: '/var/lib/mongodb'
+        mongodb::mongos::logpath: '/var/log/mongodb/mongos.log'
+        mongodb::mongos::rest: true
+        mongodb::mongos::fork: true
+        mongodb::mongos::nofile: '64000'
+        mongodb::mongos::nproc: '64000'
+ 
+Tested with 2.6.9 MongoDB version. Enjoy it. :)
+
+
 ### Deprecation Warning ###
 
 This release is a major refactoring of the module which means that the API may
