@@ -31,7 +31,7 @@ For installing a mongo data server you can use this sample Hieradatas :
         mongodb::data::mongodb_type: 'mongod'
         mongodb::data::version: '2.6.9'
         mongodb::data::bind_ip:
-        - '192.168.2.59'
+        - '192.168.2.50'
         mongodb::data::manage_package_repo: true
         mongodb::data::dbpath: '/var/lib/mongodb'
         mongodb::data::logpath: '/var/log/mongodb/mongod.log'
@@ -74,7 +74,6 @@ For installing a mongos-router you can use this sample Hieradatas :
         mongodb::mongos::nproc: '64000'
  
 Tested with 2.6.9 MongoDB version. Enjoy it. :)
-
 
 ### Deprecation Warning ###
 
